@@ -16,7 +16,7 @@ public abstract class ChatComponentMixin implements ChatAccess {
     @Shadow
     private Minecraft minecraft;
     @Shadow
-    private List<GuiMessage.Line> trimmedMessages;
+    private List<GuiMessage> trimmedMessages;
     @Shadow
     private int chatScrollbarPos;
     
@@ -28,9 +28,9 @@ public abstract class ChatComponentMixin implements ChatAccess {
             return false;
         int j = getLinesPerPage();
         for (int o = 0; o + this.chatScrollbarPos < this.trimmedMessages.size() && o < j; o++) {
-            GuiMessage.Line guiMessage = this.trimmedMessages.get(o + this.chatScrollbarPos);
+            GuiMessage guiMessage = this.trimmedMessages.get(o + this.chatScrollbarPos);
             if (guiMessage != null) {
-                int p = i - guiMessage.addedTime();
+                int p = i - guiMessage.getAddedTime();
                 if (p > 170 && p < 200) { // 180 is correct, add a tiny buffer for the frame to catch up
                         return true;
                 }
